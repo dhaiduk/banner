@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link href="css/index.css" media="all" rel="stylesheet" type="text/css"/>
+    <title>testTitle</title>
+    <script type="text/javascript" src="settings.js"></script>
+    <title></title>
+</head>
+<body>
+<div id="left_div active" style="position: relative; margin:0 auto;max-width: 1178px;">
+    <table style="width: 100%; margin: 0 auto; margin-top: -10px; " id="creative_demo_table" class="gridTable">
+        <tbody>
+        <tr style="height: 70px;">
+            <td colspan="3" style="text-align:center">
+                <div class="ttl">Rich-Media Top Line</div>
+                <div class="wrapper-table" style="min-height: 70px;">
+                    <div id="top-rich" class="zero"></div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="width:160px">
+                <div class="ttl">Top-Left</div>
+                <div class="wrapper-table">
+                    <div id="top-left" class="zero"></div>
+                </div>
+            </td>
+            <td style="width:800px">
+                <div class="ttl">Top-Center</div>
+                <div class="wrapper-table">
+                    <div id="top-center" class="zero"></div>
+                </div>
+            </td>
+            <td style="width:300px">
+                <div class="ttl">Top-Right</div>
+                <div class="wrapper-table">
+                    <div id="top-right" class="zero"></div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="ttl">Middle-Left</div>
+                <div class="wrapper-table">
+                    <div id="mid-left" class="zero"></div>
+                </div>
+            </td>
+            <td>
+                <div class="ttl">Middle-Center</div>
+                <div class="wrapper-table">
+                    <div id="mid-center" class="zero"></div>
+                </div>
+            </td>
+            <td style="vertical-align: top;">
+                <div class="ttl">Middle-Right</div>
+                <div class="wrapper-table">
+                    <div id="mid-right" class="zero"></div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="ttl">Bottom-Left</div>
+                <div class="wrapper-table">
+                    <div id="bot-left" class="zero"></div>
+                </div>
+            </td>
+            <td>
+                <div class="ttl">Bottom-Center</div>
+                <div class="wrapper-table">
+                    <div id="bot-center" class="zero"></div>
+                </div>
+            </td>
+            <td>
+                <div class="ttl">Bottom-Right</div>
+                <div class="wrapper-table">
+                    <div id="bot-right" class="zero"></div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+    (function () {
+        var w = window,
+                d = document,
+                protocol = /https/i.test(w.location.protocol) ? 'https:' : 'http:',
+                aml = typeof admixerML !== 'undefined' ? admixerML : {};
+        aml.fn = aml.fn || [];
+        aml.invPath = aml.invPath || (protocol + '//inv-nets.admixer.net/');
+        aml.cdnPath = aml.cdnPath || (protocol + '//cdn.admixer.net/');
+        if (!w.admixerML) {
+            var lodash = document.createElement('script');
+            lodash.id = 'amlScript';
+            lodash.async = true;
+            lodash.type = 'text/javascript';
+            lodash.src = aml.cdnPath + 'scripts3/loader2.js';
+            var node = d.getElementsByTagName('script')[0];
+            node.parentNode.insertBefore(lodash, node);
+            w.admixerML = aml;
+        }
+    })();
+</script>
+<script type="text/javascript">
+    var zones = window.zones || {};
+    var json = {
+        "seatbid": [{
+            "seat": "{{phId}}",
+            "bid": [{
+                "adid": "{{adId}}",
+                "impid": "requestId",
+                "advertid": "advertId",
+                "camid": 16339,
+                "nurl": "",
+                "w": 580,
+                "h": 333,
+                "ext": {
+                    "Trackers": {
+//                        "base": ["https://localhost/crevt.aspx?item={{adId}}&cc=UA/12&am-uid=amUid&_admixevts_&profile=profileId&zone=zoneId&rule=rule&requestId=requestId&sw=[e=screen.width]&sh=[e=screen.height]"]
+                    },
+                    "Settings": "{\"OId\":\"{{adId}}\",\"TemplateId\":52,\"tempType\":52,\"Events\":[{\"Name\":\"click\",\"Urls\":[]},{\"Name\":\"view\",\"Urls\":[]},{\"Name\":\"confirmview\",\"Urls\":[]}],\"Items\":[{\"Name\":\"body\",\"Ext\":\".zip\",\"ItemId\":1,\"Types\":[\".zip\"],\"Params\":[{\"Name\":\"libVersion\",\"Value\":2},{\"Name\":\"width\",\"Value\":\"580\"},{\"Name\":\"height\",\"Value\":\"333\"},{\"Name\":\"parametr\",\"Value\":\"0\"}],\"IsVideo\":false}]}",
+                    "FrameTemplate": "",
+                    "Murl": location.protocol + '//' + location.hostname + ':' + location.port + location.pathname.replace(/[^/.]+\.[^/.]+/,'') + "banners/",
+                    "clickprice": 0.0,
+                    "utm_tags": null,
+                    "zoneid": "zoneId",
+                    "ExternalVASTUrl": null,
+                    "adGuid": "{{adId}}",
+                    "baseTempId": 0,
+                    "creativeTempId": 52,
+                    "countByConfView": false,
+                    "vaPerc": null,
+                    "vaMs": null,
+                    "IsEmpty": false,
+                    "bannerWeight": 1,
+                    "siteOId": "siteOid"
+                }
+            }]
+        }],
+        "ext": {
+            "hiddenBanners": "0",
+            "CountryCode": "UA/12",
+            "cLat": 50.4333,
+            "cLon": 30.5167,
+            "AdmVisGuid": "admVisGuid",
+            "zones": {
+                "{{phId}}": {
+                    "zone": "zoneId",
+                    "battr": 0,
+                    "cbcf": false,
+                    "PluginTrackers": []
+                }
+            }
+        }
+    };
+    var jsonString = JSON.stringify(json);
+    window.amResp = window.amResp || [];
+    var str, js,keys = Object.keys(zones);
+    for (var i = 0, ln = keys.length; i < ln; i++) {
+        str = jsonString.replace(/{{(phId|adId)}}/mg, function (res) {
+            switch (res) {
+                case "{{adId}}" :
+                    return zones[keys[i]];
+                    break;
+                case "{{phId}}" :
+                    return keys[i];
+                    break;
+            }
+        });
+        js = JSON.parse(str);
+        admixerML.fn.push(function(){
+			admixerML.proceedSPResponse(js);
+			admixerML.display(js.seatbid[0].seat);
+		})
+    }
+//    window.amResp.push(json);
+</script>
+</body>
+</html>
