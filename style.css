@@ -1,0 +1,83 @@
+html,
+body {
+    margin: 0 0 0 0;
+}
+
+
+
+  #animatedBackground2 {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url("images/игра-слой-2.png");
+    background-repeat: repeat;
+    background-position: 0 0;
+    background-size: auto 100%;
+  /*adjust s value for speed*/
+    animation: animatedBackground 500s linear infinite;
+  }
+  #animatedBackground3 {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url("images/игра-слой-3.png");
+    background-repeat: repeat;
+    background-position: 0 0;
+    background-size: auto 100%;
+  /*adjust s value for speed*/
+    animation: animatedBackground 400s linear infinite;
+  }
+  #animatedBackground4 {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url("images/игра-слой-4.png");
+    background-repeat: repeat;
+    background-position: 0 0;
+    background-size: auto 100%;
+  /*adjust s value for speed*/
+    animation: animatedBackground 300s linear infinite;
+  }
+#animatedBackground5 {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url("images/игра-слой-5.png");
+    background-repeat: repeat;
+    background-position: 0 0;
+    background-size: auto 100%;
+  /*adjust s value for speed*/
+    animation: animatedBackground 200s linear infinite;
+  }
+
+#animatedBackground6 {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: url("images/игра-слой-6.png");
+  background-repeat: repeat;
+  background-position: 0 0;
+  background-size: auto 100%;
+/*adjust s value for speed*/
+  animation: animatedBackground 100s linear infinite;
+}
+
+@keyframes animatedBackground {
+  from {
+    background-position: 0 0;
+  }
+/*use negative width if you want it to flow right to left else and positive for left to right*/
+  to {
+    background-position: -10000px 0;
+  }
+}
