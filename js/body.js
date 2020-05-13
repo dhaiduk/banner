@@ -3,11 +3,11 @@ var countMeter;
 
 //Get main container banner
 var DOM_mainContainer = document.getElementById("container");
-var WIDTH = DOM_mainContainer.offsetWidth;
-var HEIGHT = DOM_mainContainer.offsetHeight;
+var WIDTH_MAIN = DOM_mainContainer.offsetWidth;
+var HEIGHT_MAIN = DOM_mainContainer.offsetHeight;
 
 //Styles
-var styleBanner = "width: ${WIDTH} px; height: ${HEIGHT} px; position: absolute; left: 0;top: 0; ";
+var styleBanner = "width: ${WIDTH_MAIN} px; height: ${HEIGHT_MAIN} px; position: absolute; left: 0;top: 0; ";
 var styleDino = "height: 150px; position: absolute; left: 2%; top: 30%;";
 var styleCounterMeter = "width: 100px; position: absolute; left: 5px; top: 5px;";
 var styleCounterEnergy = "width: 100px; position: absolute; left: 545px;; top: 5px;";
@@ -182,25 +182,38 @@ var RAF = window.requestAnimationFrame ||
 	function (callback) { window.setTimeout(callback, 1000 / 60); }
 	;
 
-var ballH = {
+var DOM_IconApp_Position = {
 	posX: -200,
 	posY: -500,
 	speedX: 4,
 	speedY: 10,
-	width: 100,
-	height: 100,
+	scale: 1,
+	opacity: 0,
 
 	update: function () {
-		var ballElem = DOM_IconApp;
-		ballElem.style.left = this.posX + "px";
-		ballElem.style.top = this.posY + "px";
+		DOM_IconApp.style.left = this.posX + "px";
+		DOM_IconApp.style.top = this.posY + "px";
+		DOM_IconApp.style.width= this.scale + "px";
+		DOM_IconApp.style.opacity = this.opacity;
+	}
+};
+
+var DOM_TextFirstSlide_Position = {
+	posX: 300,
+	posY: 600,
+	speedX: 8,
+	speedY: 15,
+	scale: 2000,
+	opacity: 0,
+
+	update: function () {
+		DOM_TextFirstSlide.style.left = this.posX + "px";
+		DOM_TextFirstSlide.style.top = this.posX + "px";
+		DOM_TextFirstSlide.style.width = this.scale + "px";
+		DOM_TextFirstSlide.style.opacity = this.opacity;
 	}
 }
 
-var areaH = {
-	width: 400,
-	height: 300
-}
 
 function startAnime() {
 	// синхрон с внутренней анимацией браузера
@@ -210,15 +223,31 @@ function startAnime() {
 
 function tick() {
 
-	ballH.posX += ballH.speedX;
-	ballH.posY += ballH.speedY;
-	if (ballH.posX >= 0) ballH.posX =0;
-	if (ballH.posY >= 0) ballH.posY =0;
-	ballH.update();
+	DOM_IconApp_Position.posX += DOM_IconApp_Position.speedX;
+	DOM_IconApp_Position.posY += DOM_IconApp_Position.speedY;
+	DOM_IconApp_Position.scale += DOM_IconApp_Position.speedY;
+	DOM_IconApp_Position.opacity += 0.006;
+	if (DOM_IconApp_Position.posX >= 0) DOM_IconApp_Position.posX =0;
+	if (DOM_IconApp_Position.posY >= 0) DOM_IconApp_Position.posY =0;
+	if (DOM_IconApp_Position.scale >= WIDTH_MAIN) DOM_IconApp_Position.scale =WIDTH_MAIN;
+	if (DOM_IconApp_Position.opacity >= 1) DOM_IconApp_Position.opacity =1;
+	DOM_IconApp_Position.update();
+
+	DOM_TextFirstSlide_Position.posX -= DOM_TextFirstSlide_Position.speedX;
+	DOM_TextFirstSlide_Position.posY -= DOM_TextFirstSlide_Position.speedY;
+	DOM_TextFirstSlide_Position.scale -= DOM_TextFirstSlide_Position.speedY;
+	DOM_TextFirstSlide_Position.opacity += 0.005;
+	if (DOM_TextFirstSlide_Position.posX <= 0) DOM_TextFirstSlide_Position.posX =0;
+	if (DOM_TextFirstSlide_Position.posY <= 0) DOM_TextFirstSlide_Position.posY =0;
+	if (DOM_TextFirstSlide_Position.scale <= WIDTH_MAIN) DOM_TextFirstSlide_Position.scale = WIDTH_MAIN;
+	if (DOM_TextFirstSlide_Position.opacity >= 1) DOM_TextFirstSlide_Position.opacity =1;
+	DOM_TextFirstSlide_Position.update();
+
+
 
 	RAF(tick);
 }
 
-ballH.update();
+DOM_IconApp_Position.update();
 
 startAnime();
