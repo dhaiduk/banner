@@ -80,3 +80,10 @@ body {
     background-position: -10000px 0;
   }
 }
+
+.train {
+  position: relative;
+  cursor: pointer;
+  left: 100px;
+  transition: left 5s cubic-bezier(.5, -1, .5, 2);
+}
