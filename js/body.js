@@ -219,6 +219,7 @@ function PauseSlide2() {
 	DOM_Bubble4.style.animationPlayState = "paused";
 	clearInterval(timer);
 	DOM_Bubble1.addEventListener("mouseup", () => { СontinuationSlide2(); });
+	DOM_cursor.addEventListener("mouseup", () => { СontinuationSlide2(); });
 };
 
 // Paused Slide 2
