@@ -7,6 +7,7 @@ var HEIGHT_MAIN = DOM_mainContainer.offsetHeight;
 var timePassedBufer = 0, timePassedGoBufer = 0;
 var timePassed, timePassedGO;
 var start;
+var passBubble1 = false;
 //Styles
 var styleBanner = "width: ${WIDTH_MAIN} px; height: ${HEIGHT_MAIN} px; position: absolute; left: 0;top: 0; ";
 var styleDino = "height: 150px; position: absolute; left: 2%; top: 30%;";
@@ -195,23 +196,28 @@ function startSlideTwo() {
 		DOM_Bubble3.style.animationPlayState = "paused";
 		DOM_Bubble4.style.animationPlayState = "paused";
 		clearInterval(timer);
-		DOM_mainContainer.addEventListener("mouseup", () => { СontinuationSlide2(); });
+		DOM_Bubble1.addEventListener("mouseup", () => { СontinuationSlide2(); });
 };
 
 	// Paused Slide 2
 	function СontinuationSlide2 (){
 		//namePlaceMove();
+		passBubble1 = true;
 		DOM_GameLayer1.style.animationPlayState = "running";
 		DOM_GameLayer2.style.animationPlayState = "running";
 		DOM_GameLayer3.style.animationPlayState = "running";
 		DOM_GameLayer4.style.animationPlayState = "running";
 		DOM_GameLayer5.style.animationPlayState = "running";
 		DOM_GameLayer6.style.animationPlayState = "running";
-		DOM_Bubble1.style.animationPlayState = "running";
+		DOM_mainContainer.removeChild(DOM_Bubble1);
+		DOM_mainContainer.removeChild(DOM_cursor);
 		DOM_Bubble2.style.animationPlayState = "running";
 		DOM_Bubble3.style.animationPlayState = "running";
 		DOM_Bubble4.style.animationPlayState = "running";
-
+		DOM_Bubble2.addEventListener("mouseup", () => {  DOM_mainContainer.removeChild(DOM_Bubble2)});
+		DOM_Bubble3.addEventListener("mouseup", () => {  DOM_mainContainer.removeChild(DOM_Bubble3)});
+		DOM_Bubble4.addEventListener("mouseup", () => {  DOM_mainContainer.removeChild(DOM_Bubble4)});
+		namePlaceMove();
 	    };
 	//End First Slide
 	function endSlideTwo() {
@@ -270,7 +276,7 @@ function startSlideTwo() {
 			// Условие, если проценты меньше 0 то показываем финишный слайд.
 			//DOM_GameMetersCount.innerText = "150m";
 			if ((49 - timePassedGo) < 1) endSlideTwo();
-			if(DOM_Bubble1.offsetLeft <= 400) PauseSlide2();
+			if(DOM_Bubble1.offsetLeft <= 400 && !passBubble1) PauseSlide2();
 		}, 20);
 	}
 	//Step by step run app
