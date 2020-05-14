@@ -23,6 +23,7 @@ var styleBubble2 = "position: absolute; top: 80px; background-image: url('images
 var styleBubble3 = "position: absolute; top: 80px; background-image: url('images/bubble.png'); background-repeat: no-repeat; background-position: 3px -125px; width: 125px; height: 125px; animation: animatedBubble3 20s linear ;";
 var styleBubble4 = "position: absolute; top: 80px; background-image: url('images/bubble.png'); background-repeat: no-repeat; background-position: -133px -125px; width: 125px; height: 125px; animation: animatedBubble4 25s linear ;";
 var styleCursor = "position: absolute; left: 430px; top: 150px; overflow: hidden;";
+var styleMessage1 = "position: inherit; background-image: url('images/c.png'); background-repeat: no-repeat; width: 200px;";
 
 
 //Conten slide 1
@@ -58,8 +59,11 @@ var srcGameLayer6 = "images/game-layer-6.png";
 var srcCounterMeter = "images/counter-meters.png";
 var srcCounterEnergy = "images/counter-energy-100.png";
 var srcCounterEnergyFull = "images/counter-energy-0.png";
-var srcBubble = "images/bubble.png";
 var srcCursor = "images/cursor.png";
+var srcMessageC = "images/c.png";
+var srcMessageM = "images/m.png";
+var srcMessageS = "images/s.png";
+var srcMessageSc = "images/sc.png";
 
 var DOM_GameLayer1 = document.createElement("img");
 var DOM_GameLayer2 = document.createElement("div");
@@ -74,6 +78,9 @@ var DOM_Bubble2 = document.createElement("div");
 var DOM_Bubble3 = document.createElement("div");
 var DOM_Bubble4 = document.createElement("div");
 var DOM_cursor = document.createElement("img");
+
+
+var DOM_messageC = document.createElement("img");
 //Counters
 var DOM_CounterMeter = document.createElement("div");
 var DOM_CounterEnergy = document.createElement("div");
@@ -111,6 +118,9 @@ DOM_Bubble1.style.cssText = styleBubble1;
 DOM_Bubble2.style.cssText = styleBubble2;
 DOM_Bubble3.style.cssText = styleBubble3;
 DOM_Bubble4.style.cssText = styleBubble4;
+
+DOM_messageC.src = srcMessageC;
+DOM_messageC.src = styleMessage1;
 
 DOM_cursor.src = srcCursor;
 DOM_cursor.style.cssText = styleCursor; 
@@ -209,7 +219,8 @@ function startSlideTwo() {
 		DOM_GameLayer4.style.animationPlayState = "running";
 		DOM_GameLayer5.style.animationPlayState = "running";
 		DOM_GameLayer6.style.animationPlayState = "running";
-		DOM_mainContainer.removeChild(DOM_Bubble1);
+		DOM_Bubble1.style.cssText = styleMessage1;
+		DOM_Bubble1.appendChild(DOM_messageC);
 		DOM_mainContainer.removeChild(DOM_cursor);
 		DOM_Bubble2.style.animationPlayState = "running";
 		DOM_Bubble3.style.animationPlayState = "running";
@@ -269,7 +280,6 @@ function startSlideTwo() {
 		timer = setInterval(function () {
 			timePassed = timePassedBufer + Math.round(1.5 * (Date.now() - start) / 1000);
 			timePassedGo = timePassedGoBufer + (1.5 * (Date.now() - start) / 1000);
-			console.log(timePassed + "/"+ timePassedGo)
 			DOM_GameMetersCount.innerText = timePassed + "m";
 			DOM_GameEnergyCount.innerText = Math.round((49 - timePassedGo) * 2) + "%";
 			DOM_CounterEnergyFull.style.cssText = "width: " + Math.round(80 * ((49 - timePassedGo) * 2 / 100)) + "px; height:51px; position: absolute; left: 530px; top: 5px; overflow: hidden;";
