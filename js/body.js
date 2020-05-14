@@ -1,11 +1,12 @@
 var count;
-var countMeter;
 var timer;
 //Get main container banner
 var DOM_mainContainer = document.getElementById("container");
 var WIDTH_MAIN = DOM_mainContainer.offsetWidth;
 var HEIGHT_MAIN = DOM_mainContainer.offsetHeight;
-
+var timePassedBufer = 0, timePassedGoBufer = 0;
+var timePassed, timePassedGO;
+var start;
 //Styles
 var styleBanner = "width: ${WIDTH_MAIN} px; height: ${HEIGHT_MAIN} px; position: absolute; left: 0;top: 0; ";
 var styleDino = "height: 150px; position: absolute; left: 2%; top: 30%;";
@@ -176,29 +177,13 @@ function startSlideTwo() {
 	DOM_mainContainer.appendChild(DOM_cursor);
 	
 	namePlaceMove();
-
-	/*DOM_mainContainer.addEventListener("mouseup", () => {
-		DOM_GameLayer1.style.animationPlayState = "paused";
-		DOM_GameLayer2.style.animationPlayState = "paused";
-		DOM_GameLayer3.style.animationPlayState = "paused";
-		DOM_GameLayer4.style.animationPlayState = "paused";
-		DOM_GameLayer5.style.animationPlayState = "paused";
-		DOM_GameLayer6.style.animationPlayState = "paused";
-		DOM_Bubble1.style.animationPlayState = "paused";
-		DOM_Bubble2.style.animationPlayState = "paused";
-		DOM_Bubble3.style.animationPlayState = "paused";
-		DOM_Bubble4.style.animationPlayState = "paused";
-		clearInterval(timer);
-		//for (var i = 0; i < DOM_mainContainer.childNodes.length; ++i) //if (DOM_mainContainer.childNodes[i].style.animation ===true)
-			//DOM_mainContainer.childNodes[i].style.animationPlayState = 'paused';
-			//console.log(DOM_mainContainer.childNodes[i].style.animation);
-			//console.log(DOM_mainContainer.childNodes[i].getAttribute("animation"));
-	})*/
 }
 
 
 	// Paused Slide 2
-	function PauseSlide1 (){
+	function PauseSlide2 (){
+		timePassedBufer = timePassed;
+		timePassedGoBufer = timePassedGo;
 		DOM_GameLayer1.style.animationPlayState = "paused";
 		DOM_GameLayer2.style.animationPlayState = "paused";
 		DOM_GameLayer3.style.animationPlayState = "paused";
@@ -210,12 +195,24 @@ function startSlideTwo() {
 		DOM_Bubble3.style.animationPlayState = "paused";
 		DOM_Bubble4.style.animationPlayState = "paused";
 		clearInterval(timer);
-		//for (var i = 0; i < DOM_mainContainer.childNodes.length; ++i) //if (DOM_mainContainer.childNodes[i].style.animation ===true)
-			//DOM_mainContainer.childNodes[i].style.animationPlayState = 'paused';
-			//console.log(DOM_mainContainer.childNodes[i].style.animation);
-			//console.log(DOM_mainContainer.childNodes[i].getAttribute("animation"));
-	};
+		DOM_mainContainer.addEventListener("mouseup", () => { СontinuationSlide2(); });
+};
 
+	// Paused Slide 2
+	function СontinuationSlide2 (){
+		//namePlaceMove();
+		DOM_GameLayer1.style.animationPlayState = "running";
+		DOM_GameLayer2.style.animationPlayState = "running";
+		DOM_GameLayer3.style.animationPlayState = "running";
+		DOM_GameLayer4.style.animationPlayState = "running";
+		DOM_GameLayer5.style.animationPlayState = "running";
+		DOM_GameLayer6.style.animationPlayState = "running";
+		DOM_Bubble1.style.animationPlayState = "running";
+		DOM_Bubble2.style.animationPlayState = "running";
+		DOM_Bubble3.style.animationPlayState = "running";
+		DOM_Bubble4.style.animationPlayState = "running";
+
+	    };
 	//End First Slide
 	function endSlideTwo() {
 		DOM_mainContainer.removeChild(DOM_GameLayer1);
@@ -259,23 +256,21 @@ function startSlideTwo() {
 	};
 
 	function namePlaceMove() {
-		countMeter = 0;
-		var countText = "" + count;
+		//count = count + 10;
 
-		count = count + 10;
-
-		var start = Date.now(); // запомнить время начала
+		start = Date.now(); // запомнить время начала
 
 		timer = setInterval(function () {
-			var timePassed = Math.round(1.5 * (Date.now() - start) / 1000);
-			var timePassedGo = (1.5 * (Date.now() - start) / 1000);
+			timePassed = timePassedBufer + Math.round(1.5 * (Date.now() - start) / 1000);
+			timePassedGo = timePassedGoBufer + (1.5 * (Date.now() - start) / 1000);
+			console.log(timePassed + "/"+ timePassedGo)
 			DOM_GameMetersCount.innerText = timePassed + "m";
 			DOM_GameEnergyCount.innerText = Math.round((49 - timePassedGo) * 2) + "%";
 			DOM_CounterEnergyFull.style.cssText = "width: " + Math.round(80 * ((49 - timePassedGo) * 2 / 100)) + "px; height:51px; position: absolute; left: 530px; top: 5px; overflow: hidden;";
 			// Условие, если проценты меньше 0 то показываем финишный слайд.
 			//DOM_GameMetersCount.innerText = "150m";
 			if ((49 - timePassedGo) < 1) endSlideTwo();
-			if(DOM_Bubble1.offsetLeft <= 400) PauseSlide1();
+			if(DOM_Bubble1.offsetLeft <= 400) PauseSlide2();
 		}, 20);
 	}
 	//Step by step run app
