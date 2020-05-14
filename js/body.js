@@ -22,7 +22,7 @@ var styleBubble1 = "position: absolute; top: 80px; background-image: url('images
 var styleBubble2 = "position: absolute; top: 80px; background-image: url('images/bubble.png'); background-repeat: no-repeat; background-position: -133px 0px; width: 125px; height: 125px; animation: animatedBubble2 15s linear ;";
 var styleBubble3 = "position: absolute; top: 80px; background-image: url('images/bubble.png'); background-repeat: no-repeat; background-position: 3px -125px; width: 125px; height: 125px; animation: animatedBubble3 20s linear ;";
 var styleBubble4 = "position: absolute; top: 80px; background-image: url('images/bubble.png'); background-repeat: no-repeat; background-position: -133px -125px; width: 125px; height: 125px; animation: animatedBubble4 25s linear ;";
-var styleCursor = "position: absolute; left: 430px; top: 150px; overflow: hidden;";
+var styleCursor = "position: absolute; left: 430px; top: 150px; overflow: hidden; opacity: 1; animation: show 1s linear;";
 var styleMessage = "position: inherit; opacity: 0; animation: hide 1s linear;";
 
 
@@ -196,7 +196,7 @@ function startSlideTwo() {
 	DOM_mainContainer.appendChild(DOM_Bubble2);
 	DOM_mainContainer.appendChild(DOM_Bubble3);
 	DOM_mainContainer.appendChild(DOM_Bubble4);
-	DOM_mainContainer.appendChild(DOM_cursor);
+	
 
 	namePlaceMove();
 }
@@ -204,6 +204,7 @@ function startSlideTwo() {
 
 // Paused Slide 2
 function PauseSlide2() {
+	DOM_mainContainer.appendChild(DOM_cursor);
 	timePassedBufer = timePassed;
 	timePassedGoBufer = timePassedGo;
 	DOM_GameLayer1.style.animationPlayState = "paused";
