@@ -23,7 +23,7 @@ var styleBubble2 = "position: absolute; top: 80px; background-image: url('images
 var styleBubble3 = "position: absolute; top: 80px; background-image: url('images/bubble.png'); background-repeat: no-repeat; background-position: 3px -125px; width: 125px; height: 125px; animation: animatedBubble3 20s linear ;";
 var styleBubble4 = "position: absolute; top: 80px; background-image: url('images/bubble.png'); background-repeat: no-repeat; background-position: -133px -125px; width: 125px; height: 125px; animation: animatedBubble4 25s linear ;";
 var styleCursor = "position: absolute; left: 430px; top: 150px; overflow: hidden;";
-var styleMessage1 = "position: inherit; background-image: url('images/c.png'); background-repeat: no-repeat; width: 200px;";
+var styleMessage = "position: inherit; opacity: 0; animation: hide 1s linear;";
 
 
 //Conten slide 1
@@ -60,10 +60,10 @@ var srcCounterMeter = "images/counter-meters.png";
 var srcCounterEnergy = "images/counter-energy-100.png";
 var srcCounterEnergyFull = "images/counter-energy-0.png";
 var srcCursor = "images/cursor.png";
-var srcMessageC = "images/c.png";
+var srcMessageSk = "images/sk.png";
 var srcMessageM = "images/m.png";
 var srcMessageS = "images/s.png";
-var srcMessageSc = "images/sc.png";
+var srcMessageC = "images/c.png";
 
 var DOM_GameLayer1 = document.createElement("img");
 var DOM_GameLayer2 = document.createElement("div");
@@ -81,6 +81,11 @@ var DOM_cursor = document.createElement("img");
 
 
 var DOM_messageC = document.createElement("img");
+var DOM_messageM = document.createElement("img");
+var DOM_messageS = document.createElement("img");
+var DOM_messageSk = document.createElement("img");
+
+
 //Counters
 var DOM_CounterMeter = document.createElement("div");
 var DOM_CounterEnergy = document.createElement("div");
@@ -120,10 +125,16 @@ DOM_Bubble3.style.cssText = styleBubble3;
 DOM_Bubble4.style.cssText = styleBubble4;
 
 DOM_messageC.src = srcMessageC;
-DOM_messageC.src = styleMessage1;
+DOM_messageC.style.cssText = styleMessage;
+DOM_messageM.src = srcMessageM;
+DOM_messageM.style.cssText = styleMessage;
+DOM_messageS.src = srcMessageS;
+DOM_messageS.style.cssText = styleMessage;
+DOM_messageSk.src = srcMessageSk;
+DOM_messageSk.style.cssText = styleMessage;
 
 DOM_cursor.src = srcCursor;
-DOM_cursor.style.cssText = styleCursor; 
+DOM_cursor.style.cssText = styleCursor;
 //Start Slide One
 function startSlideOne() {
 
@@ -186,185 +197,198 @@ function startSlideTwo() {
 	DOM_mainContainer.appendChild(DOM_Bubble3);
 	DOM_mainContainer.appendChild(DOM_Bubble4);
 	DOM_mainContainer.appendChild(DOM_cursor);
-	
+
 	namePlaceMove();
 }
 
 
-	// Paused Slide 2
-	function PauseSlide2 (){
-		timePassedBufer = timePassed;
-		timePassedGoBufer = timePassedGo;
-		DOM_GameLayer1.style.animationPlayState = "paused";
-		DOM_GameLayer2.style.animationPlayState = "paused";
-		DOM_GameLayer3.style.animationPlayState = "paused";
-		DOM_GameLayer4.style.animationPlayState = "paused";
-		DOM_GameLayer5.style.animationPlayState = "paused";
-		DOM_GameLayer6.style.animationPlayState = "paused";
-		DOM_Bubble1.style.animationPlayState = "paused";
-		DOM_Bubble2.style.animationPlayState = "paused";
-		DOM_Bubble3.style.animationPlayState = "paused";
-		DOM_Bubble4.style.animationPlayState = "paused";
-		clearInterval(timer);
-		DOM_Bubble1.addEventListener("mouseup", () => { СontinuationSlide2(); });
+// Paused Slide 2
+function PauseSlide2() {
+	timePassedBufer = timePassed;
+	timePassedGoBufer = timePassedGo;
+	DOM_GameLayer1.style.animationPlayState = "paused";
+	DOM_GameLayer2.style.animationPlayState = "paused";
+	DOM_GameLayer3.style.animationPlayState = "paused";
+	DOM_GameLayer4.style.animationPlayState = "paused";
+	DOM_GameLayer5.style.animationPlayState = "paused";
+	DOM_GameLayer6.style.animationPlayState = "paused";
+	DOM_Bubble1.style.animationPlayState = "paused";
+	DOM_Bubble2.style.animationPlayState = "paused";
+	DOM_Bubble3.style.animationPlayState = "paused";
+	DOM_Bubble4.style.animationPlayState = "paused";
+	clearInterval(timer);
+	DOM_Bubble1.addEventListener("mouseup", () => { СontinuationSlide2(); });
 };
 
-	// Paused Slide 2
-	function СontinuationSlide2 (){
-		//namePlaceMove();
-		passBubble1 = true;
-		DOM_GameLayer1.style.animationPlayState = "running";
-		DOM_GameLayer2.style.animationPlayState = "running";
-		DOM_GameLayer3.style.animationPlayState = "running";
-		DOM_GameLayer4.style.animationPlayState = "running";
-		DOM_GameLayer5.style.animationPlayState = "running";
-		DOM_GameLayer6.style.animationPlayState = "running";
-		DOM_Bubble1.style.cssText = styleMessage1;
-		DOM_Bubble1.appendChild(DOM_messageC);
-		DOM_mainContainer.removeChild(DOM_cursor);
-		DOM_Bubble2.style.animationPlayState = "running";
-		DOM_Bubble3.style.animationPlayState = "running";
-		DOM_Bubble4.style.animationPlayState = "running";
-		DOM_Bubble2.addEventListener("mouseup", () => {  DOM_mainContainer.removeChild(DOM_Bubble2)});
-		DOM_Bubble3.addEventListener("mouseup", () => {  DOM_mainContainer.removeChild(DOM_Bubble3)});
-		DOM_Bubble4.addEventListener("mouseup", () => {  DOM_mainContainer.removeChild(DOM_Bubble4)});
-		namePlaceMove();
-	    };
-	//End First Slide
-	function endSlideTwo() {
-		DOM_mainContainer.removeChild(DOM_GameLayer1);
-		DOM_mainContainer.removeChild(DOM_GameLayer2);
-		DOM_mainContainer.removeChild(DOM_GameLayer3);
-		DOM_mainContainer.removeChild(DOM_GameLayer4);
-		DOM_mainContainer.removeChild(DOM_GameLayer5);
-		DOM_mainContainer.removeChild(DOM_CounterMeterImg);
-		DOM_mainContainer.removeChild(DOM_CounterMeter);
-		DOM_mainContainer.removeChild(DOM_CounterEnergyImg);
-		DOM_mainContainer.removeChild(DOM_CounterEnergyFull);
-		DOM_mainContainer.removeChild(DOM_CounterEnergy);
-		DOM_mainContainer.removeChild(DOM_Dino);
-		DOM_mainContainer.removeChild(DOM_GameLayer6);
-		startSlideThree();
-	};
+// Paused Slide 2
+function СontinuationSlide2() {
+	//namePlaceMove();
+	passBubble1 = true;
+	DOM_GameLayer1.style.animationPlayState = "running";
+	DOM_GameLayer2.style.animationPlayState = "running";
+	DOM_GameLayer3.style.animationPlayState = "running";
+	DOM_GameLayer4.style.animationPlayState = "running";
+	DOM_GameLayer5.style.animationPlayState = "running";
+	DOM_GameLayer6.style.animationPlayState = "running";
+	DOM_Bubble1.style.backgroundImage = "none";
+	DOM_Bubble1.appendChild(DOM_messageS);
+	DOM_mainContainer.removeChild(DOM_cursor);
+	DOM_Bubble2.style.animationPlayState = "running";
+	DOM_Bubble3.style.animationPlayState = "running";
+	DOM_Bubble4.style.animationPlayState = "running";
+	DOM_Bubble2.addEventListener("mouseup", () => {
+		DOM_mainContainer.removeChild(DOM_Bubble1);
+		DOM_Bubble2.style.backgroundImage = "none";
+		DOM_Bubble2.appendChild(DOM_messageM)
+	});
+	DOM_Bubble3.addEventListener("mouseup", () => {
+		DOM_mainContainer.removeChild(DOM_Bubble2);
+		DOM_Bubble3.style.backgroundImage = "none";
+		DOM_Bubble3.appendChild(DOM_messageSk)
+	});
+	DOM_Bubble4.addEventListener("mouseup", () => {
+		DOM_mainContainer.removeChild(DOM_Bubble3);
+		DOM_Bubble4.style.backgroundImage = "none";
+		DOM_Bubble4.appendChild(DOM_messageC)
+	});
+	namePlaceMove();
+};
+//End First Slide
+function endSlideTwo() {
+	DOM_mainContainer.removeChild(DOM_GameLayer1);
+	DOM_mainContainer.removeChild(DOM_GameLayer2);
+	DOM_mainContainer.removeChild(DOM_GameLayer3);
+	DOM_mainContainer.removeChild(DOM_GameLayer4);
+	DOM_mainContainer.removeChild(DOM_GameLayer5);
+	DOM_mainContainer.removeChild(DOM_CounterMeterImg);
+	DOM_mainContainer.removeChild(DOM_CounterMeter);
+	DOM_mainContainer.removeChild(DOM_CounterEnergyImg);
+	DOM_mainContainer.removeChild(DOM_CounterEnergyFull);
+	DOM_mainContainer.removeChild(DOM_CounterEnergy);
+	DOM_mainContainer.removeChild(DOM_Dino);
+	DOM_mainContainer.removeChild(DOM_GameLayer6);
+	startSlideThree();
+};
 
-	//Start Slide Two
-	function startSlideThree() {
-		DOM_Background.src = srcBackground;
-		DOM_Background.style.cssText = styleBanner;
+//Start Slide Two
+function startSlideThree() {
+	DOM_Background.src = srcBackground;
+	DOM_Background.style.cssText = styleBanner;
 
 
-		DOM_TextSecondSlide.src = srcTextSecondSlide;
-		DOM_TextSecondSlide.style.cssText = styleBanner;
+	DOM_TextSecondSlide.src = srcTextSecondSlide;
+	DOM_TextSecondSlide.style.cssText = styleBanner;
 
-		DOM_BtnSecondSlide.src = srcBtnSecondSlide;
-		DOM_BtnSecondSlide.style.cssText = styleBanner;
+	DOM_BtnSecondSlide.src = srcBtnSecondSlide;
+	DOM_BtnSecondSlide.style.cssText = styleBanner;
 
-		DOM_IconApp.src = srcIconApp;
-		DOM_IconApp.style.cssText = styleBanner;
+	DOM_IconApp.src = srcIconApp;
+	DOM_IconApp.style.cssText = styleBanner;
 
-		DOM_IconsMarkets.src = srcIconsMarkets;
-		DOM_IconsMarkets.style.cssText = styleBanner;
+	DOM_IconsMarkets.src = srcIconsMarkets;
+	DOM_IconsMarkets.style.cssText = styleBanner;
 
-		DOM_mainContainer.appendChild(DOM_Background);
-		DOM_mainContainer.appendChild(DOM_TextSecondSlide);
-		DOM_mainContainer.appendChild(DOM_BtnSecondSlide);
-		DOM_mainContainer.appendChild(DOM_IconApp);
-		DOM_mainContainer.appendChild(DOM_IconsMarkets);
-	};
+	DOM_mainContainer.appendChild(DOM_Background);
+	DOM_mainContainer.appendChild(DOM_TextSecondSlide);
+	DOM_mainContainer.appendChild(DOM_BtnSecondSlide);
+	DOM_mainContainer.appendChild(DOM_IconApp);
+	DOM_mainContainer.appendChild(DOM_IconsMarkets);
+};
 
-	function namePlaceMove() {
-		//count = count + 10;
+function namePlaceMove() {
+	//count = count + 10;
 
-		start = Date.now(); // запомнить время начала
+	start = Date.now(); // запомнить время начала
 
-		timer = setInterval(function () {
-			timePassed = timePassedBufer + Math.round(1.5 * (Date.now() - start) / 1000);
-			timePassedGo = timePassedGoBufer + (1.5 * (Date.now() - start) / 1000);
-			DOM_GameMetersCount.innerText = timePassed + "m";
-			DOM_GameEnergyCount.innerText = Math.round((49 - timePassedGo) * 2) + "%";
-			DOM_CounterEnergyFull.style.cssText = "width: " + Math.round(80 * ((49 - timePassedGo) * 2 / 100)) + "px; height:51px; position: absolute; left: 530px; top: 5px; overflow: hidden;";
-			// Условие, если проценты меньше 0 то показываем финишный слайд.
-			//DOM_GameMetersCount.innerText = "150m";
-			if ((49 - timePassedGo) < 1) endSlideTwo();
-			if(DOM_Bubble1.offsetLeft <= 400 && !passBubble1) PauseSlide2();
-		}, 20);
+	timer = setInterval(function () {
+		timePassed = timePassedBufer + Math.round(1.5 * (Date.now() - start) / 1000);
+		timePassedGo = timePassedGoBufer + (1.5 * (Date.now() - start) / 1000);
+		DOM_GameMetersCount.innerText = timePassed + "m";
+		DOM_GameEnergyCount.innerText = Math.round((49 - timePassedGo) * 2) + "%";
+		DOM_CounterEnergyFull.style.cssText = "width: " + Math.round(80 * ((49 - timePassedGo) * 2 / 100)) + "px; height:51px; position: absolute; left: 530px; top: 5px; overflow: hidden;";
+		// Условие, если проценты меньше 0 то показываем финишный слайд.
+		//DOM_GameMetersCount.innerText = "150m";
+		if ((49 - timePassedGo) < 1) endSlideTwo();
+		if (DOM_Bubble1.offsetLeft <= 400 && !passBubble1) PauseSlide2();
+		if (DOM_Bubble1.offsetLeft <=-90) DOM_mainContainer.removeChild(DOM_Bubble1);
+		if (DOM_Bubble2.offsetLeft <=-90) DOM_mainContainer.removeChild(DOM_Bubble2);
+		if (DOM_Bubble3.offsetLeft <=-90) DOM_mainContainer.removeChild(DOM_Bubble3);
+		if (DOM_Bubble4.offsetLeft <=-90) DOM_mainContainer.removeChild(DOM_Bubble4);
+	}, 20);
+}
+//Step by step run app
+startSlideOne();
+
+var RAF = window.requestAnimationFrame ||
+	window.webkitRequestAnimationFrame ||
+	window.mozRequestAnimationFrame ||
+	window.oRequestAnimationFrame ||
+	window.msRequestAnimationFrame ||
+	function (callback) { window.setTimeout(callback, 1000 / 60); }
+	;
+
+var DOM_IconApp_Position = {
+	posY: -500,
+	speedY: 10,
+	update: function () {
+		DOM_IconApp.style.top = this.posY + "px";
+		DOM_IconApp.style.opacity = this.opacity;
 	}
-	//Step by step run app
-	startSlideOne();
+};
 
-	//DOM_mainContainer.addEventListener("mouseup", () => { startTimerslideOne = setTimeout(endSlideOne, 2000); });
-	//DOM_mainContainer.addEventListener("touchend", () => { startTimerslideOne = setTimeout(endSlideOne, 2000); });
-
-	var RAF = window.requestAnimationFrame ||
-		window.webkitRequestAnimationFrame ||
-		window.mozRequestAnimationFrame ||
-		window.oRequestAnimationFrame ||
-		window.msRequestAnimationFrame ||
-		function (callback) { window.setTimeout(callback, 1000 / 60); }
-		;
-
-	var DOM_IconApp_Position = {
-		posY: -500,
-		speedY: 10,
-		update: function () {
-			DOM_IconApp.style.top = this.posY + "px";
-			DOM_IconApp.style.opacity = this.opacity;
-		}
-	};
-
-	var DOM_TextFirstSlide_Position = {
-		posY: 600,
-		speedY: 15,
-		opacity: 0,
-		update: function () {
-			DOM_TextFirstSlide.style.top = this.posY + "px";
-			DOM_TextFirstSlide.style.opacity = this.opacity;
-		}
+var DOM_TextFirstSlide_Position = {
+	posY: 600,
+	speedY: 15,
+	opacity: 0,
+	update: function () {
+		DOM_TextFirstSlide.style.top = this.posY + "px";
+		DOM_TextFirstSlide.style.opacity = this.opacity;
 	}
+}
 
 
-	function startAnime() {
-		RAF(tick);
-	}
+function startAnime() {
+	RAF(tick);
+}
 
-	function tick() {
-		DOM_IconApp_Position.posY += DOM_IconApp_Position.speedY;
-		DOM_IconApp_Position.opacity += 0.006;
-		if (DOM_IconApp_Position.posY >= 0) DOM_IconApp_Position.posY = 0;
-		if (DOM_IconApp_Position.opacity >= 1) DOM_IconApp_Position.opacity = 1;
-		DOM_IconApp_Position.update();
-
-		DOM_TextFirstSlide_Position.posY -= DOM_TextFirstSlide_Position.speedY;
-		DOM_TextFirstSlide_Position.opacity += 0.007;
-		if (DOM_TextFirstSlide_Position.posY <= 0) DOM_TextFirstSlide_Position.posY = 0;
-		if (DOM_TextFirstSlide_Position.opacity >= 1) DOM_TextFirstSlide_Position.opacity = 1;
-		DOM_TextFirstSlide_Position.update();
-
-		RAF(tick);
-	}
-
+function tick() {
+	DOM_IconApp_Position.posY += DOM_IconApp_Position.speedY;
+	DOM_IconApp_Position.opacity += 0.006;
+	if (DOM_IconApp_Position.posY >= 0) DOM_IconApp_Position.posY = 0;
+	if (DOM_IconApp_Position.opacity >= 1) DOM_IconApp_Position.opacity = 1;
 	DOM_IconApp_Position.update();
 
-	startAnime();
+	DOM_TextFirstSlide_Position.posY -= DOM_TextFirstSlide_Position.speedY;
+	DOM_TextFirstSlide_Position.opacity += 0.007;
+	if (DOM_TextFirstSlide_Position.posY <= 0) DOM_TextFirstSlide_Position.posY = 0;
+	if (DOM_TextFirstSlide_Position.opacity >= 1) DOM_TextFirstSlide_Position.opacity = 1;
+	DOM_TextFirstSlide_Position.update();
 
-	admixAPI.on('load', function () {
-		admixAPI.init({
-			'resize': [
-				{
-					'name': 'state-1',
-					'width': '650px',
-					'height': '250px'
-				}
-			]
-		});
-		function $(id) {
-			return document.getElementById(id);
-		}
+	RAF(tick);
+}
 
-		/*document.body.onclick = function(){
-			admixAPI.click('https://ar.team');
-		};
-		document.body.onselectstart = function() {
-			return false;
-		}*/
+DOM_IconApp_Position.update();
+
+startAnime();
+
+admixAPI.on('load', function () {
+	admixAPI.init({
+		'resize': [
+			{
+				'name': 'state-1',
+				'width': '650px',
+				'height': '250px'
+			}
+		]
 	});
+	function $(id) {
+		return document.getElementById(id);
+	}
+
+	/*document.body.onclick = function(){
+		admixAPI.click('https://ar.team');
+	};
+	document.body.onselectstart = function() {
+		return false;
+	}*/
+});
