@@ -1,6 +1,6 @@
 var count;
 var countMeter;
-
+var timer;
 //Get main container banner
 var DOM_mainContainer = document.getElementById("container");
 var WIDTH_MAIN = DOM_mainContainer.offsetWidth;
@@ -9,11 +9,19 @@ var HEIGHT_MAIN = DOM_mainContainer.offsetHeight;
 //Styles
 var styleBanner = "width: ${WIDTH_MAIN} px; height: ${HEIGHT_MAIN} px; position: absolute; left: 0;top: 0; ";
 var styleDino = "height: 150px; position: absolute; left: 2%; top: 30%;";
-var styleCounterMeter = "width: 100px; position: absolute; left: 5px; top: 5px;";
-var styleCounterEnergy = "width: 100px; position: absolute; left: 545px;; top: 5px;";
-var styleCounterMeterImg = "width: 100px; position: absolute; ";
-var styleCounterEnergyImg = "width: 100px; position: absolute; ";
+var styleCounterMeter = "width: 115px; position: absolute; left: 20px; top: 0px;";
+var styleCounterEnergy = "width: 115px; position: absolute; left: 515px; top: 0px;";
+var styleCounterMeterImg = "width: 115px; position: absolute; left: 5px; top: 5px;";
+var styleCounterEnergyImg = "width: 115px; position: absolute; left: 530px; top: 5px;";
+var styleCounterEnergyFull = "width: 80px; height:51px; position: absolute; left: 530px; top: 5px; overflow: hidden;";
+var styleCounterEnergyImgFull = "width: 115px; margin: 0px 0px 0px 0px; position: absolute; left: 0px; top: 0px;";
 var styleGameTableMeters = "width: 70px; position: absolute; top: 70%;";
+var styleBubble1 = "position: absolute; top: 80px; background-image: url('images/bubble.png'); background-repeat: no-repeat; background-position: 3px 0px; width: 125px; height: 125px;  animation: animatedBubble1 10s linear;";
+var styleBubble2 = "position: absolute; top: 80px; background-image: url('images/bubble.png'); background-repeat: no-repeat; background-position: -133px 0px; width: 125px; height: 125px; animation: animatedBubble2 15s linear ;";
+var styleBubble3 = "position: absolute; top: 80px; background-image: url('images/bubble.png'); background-repeat: no-repeat; background-position: 3px -125px; width: 125px; height: 125px; animation: animatedBubble3 20s linear ;";
+var styleBubble4 = "position: absolute; top: 80px; background-image: url('images/bubble.png'); background-repeat: no-repeat; background-position: -133px -125px; width: 125px; height: 125px; animation: animatedBubble4 25s linear ;";
+var styleCursor = "position: absolute; left: 430px; top: 150px; overflow: hidden;";
+
 
 //Conten slide 1
 var srcBackground = "images/bg.jpg";
@@ -22,8 +30,14 @@ var srcLogoRastishka = "images/logo-rastishka.png";
 var srcIconApp = "images/icon-app.png";
 var srcIconsMarkets = "images/icon-stores.png";
 
+//Conten slide 3
+var srcTextSecondSlide = "images/slide-2-text.png";
+var srcBtnSecondSlide = "images/slide-2-btn.png";
+
 var DOM_Background = document.createElement("img");
 var DOM_TextFirstSlide = document.createElement("img");
+var DOM_TextSecondSlide = document.createElement("img");
+var DOM_BtnSecondSlide = document.createElement("img");
 var DOM_LogoRastishka = document.createElement("img");
 var DOM_IconApp = document.createElement("img");
 var DOM_IconsMarkets = document.createElement("img");
@@ -40,7 +54,10 @@ var srcGameLayer4 = "images/game-layer-4.png";
 var srcGameLayer5 = "images/game-layer-5.png";
 var srcGameLayer6 = "images/game-layer-6.png";
 var srcCounterMeter = "images/counter-meters.png";
-var srcCounterEnergy = "images/counter-energy-0.png";
+var srcCounterEnergy = "images/counter-energy-100.png";
+var srcCounterEnergyFull = "images/counter-energy-0.png";
+var srcBubble = "images/bubble.png";
+var srcCursor = "images/cursor.png";
 
 var DOM_GameLayer1 = document.createElement("img");
 var DOM_GameLayer2 = document.createElement("div");
@@ -49,12 +66,19 @@ var DOM_GameLayer4 = document.createElement("div");
 var DOM_GameLayer5 = document.createElement("div");
 var DOM_GameLayer6 = document.createElement("div");
 var DOM_GameMetersCount = document.createElement("p");
-
+var DOM_GameEnergyCount = document.createElement("p");
+var DOM_Bubble1 = document.createElement("div");
+var DOM_Bubble2 = document.createElement("div");
+var DOM_Bubble3 = document.createElement("div");
+var DOM_Bubble4 = document.createElement("div");
+var DOM_cursor = document.createElement("img");
 //Counters
 var DOM_CounterMeter = document.createElement("div");
 var DOM_CounterEnergy = document.createElement("div");
+var DOM_CounterEnergyFull = document.createElement("div");
 var DOM_CounterMeterImg = document.createElement("img");
 var DOM_CounterEnergyImg = document.createElement("img");
+var DOM_CounterEnergyImgFull = document.createElement("img");
 
 DOM_Dino.src = srcDino;
 DOM_Dino.style.cssText = styleDino;
@@ -67,15 +91,27 @@ DOM_GameLayer5.id = "animatedBackground5";
 DOM_GameLayer6.id = "animatedBackground6";
 
 DOM_CounterMeter.style.cssText = styleCounterMeter;
+DOM_CounterMeter.appendChild(DOM_GameMetersCount);
 DOM_CounterMeterImg.src = srcCounterMeter;
 DOM_CounterMeterImg.style.cssText = styleCounterMeterImg;
-DOM_CounterMeter.appendChild(DOM_CounterMeterImg);
+
 DOM_CounterEnergy.style.cssText = styleCounterEnergy;
+DOM_CounterEnergy.appendChild(DOM_GameEnergyCount);
 DOM_CounterEnergyImg.src = srcCounterEnergy;
 DOM_CounterEnergyImg.style.cssText = styleCounterEnergyImg;
-DOM_CounterEnergy.appendChild(DOM_CounterEnergyImg);
 
+DOM_CounterEnergyFull.style.cssText = styleCounterEnergyFull;
+DOM_CounterEnergyFull.appendChild(DOM_CounterEnergyImgFull);
+DOM_CounterEnergyImgFull.src = srcCounterEnergyFull;
+DOM_CounterEnergyImgFull.style.cssText = styleCounterEnergyImgFull;
 
+DOM_Bubble1.style.cssText = styleBubble1;
+DOM_Bubble2.style.cssText = styleBubble2;
+DOM_Bubble3.style.cssText = styleBubble3;
+DOM_Bubble4.style.cssText = styleBubble4;
+
+DOM_cursor.src = srcCursor;
+DOM_cursor.style.cssText = styleCursor; 
 //Start Slide One
 function startSlideOne() {
 
@@ -102,10 +138,8 @@ function startSlideOne() {
 	DOM_mainContainer.appendChild(DOM_LogoRastishka);
 	DOM_mainContainer.appendChild(DOM_IconApp);
 	DOM_mainContainer.appendChild(DOM_IconsMarkets);
-	
 
-
-
+	startTimerslideOne = setTimeout(endSlideOne, 3000);
 
 };
 //End First Slide
@@ -118,7 +152,6 @@ function endSlideOne() {
 	DOM_mainContainer.removeChild(DOM_IconApp);
 	DOM_mainContainer.removeChild(DOM_IconsMarkets);
 	startSlideTwo();
-
 };
 
 //Start Slide Two
@@ -129,125 +162,198 @@ function startSlideTwo() {
 	DOM_mainContainer.appendChild(DOM_GameLayer3);
 	DOM_mainContainer.appendChild(DOM_GameLayer4);
 	DOM_mainContainer.appendChild(DOM_GameLayer5);
+	DOM_mainContainer.appendChild(DOM_CounterMeterImg);
 	DOM_mainContainer.appendChild(DOM_CounterMeter);
+	DOM_mainContainer.appendChild(DOM_CounterEnergyImg);
+	DOM_mainContainer.appendChild(DOM_CounterEnergyFull);
 	DOM_mainContainer.appendChild(DOM_CounterEnergy);
 	DOM_mainContainer.appendChild(DOM_Dino);
 	DOM_mainContainer.appendChild(DOM_GameLayer6);
-
+	DOM_mainContainer.appendChild(DOM_Bubble1);
+	DOM_mainContainer.appendChild(DOM_Bubble2);
+	DOM_mainContainer.appendChild(DOM_Bubble3);
+	DOM_mainContainer.appendChild(DOM_Bubble4);
+	DOM_mainContainer.appendChild(DOM_cursor);
+	
 	namePlaceMove();
 
-	namePlaceLoop = setInterval(function () {
-		namePlaceMove();
-	}, 10000);
-
-
-
-};
-
-function namePlaceMove() {
-	countMeter = 0;
-	var countText = "" + count;
-	//DOM_GameTableMetersCount.innerText = countText;
-
-
-	count = count + 10;
-
-	let start = Date.now(); // запомнить время начала
-
-	let timer = setInterval(function () {
-		let timePassed = Date.now() - start;
-		DOM_GameMetersCount.innerText = timePassed;
-
-		DOM_CounterMeter.appendChild(DOM_GameMetersCount);
-
-	}, 20);
-
-
+	/*DOM_mainContainer.addEventListener("mouseup", () => {
+		DOM_GameLayer1.style.animationPlayState = "paused";
+		DOM_GameLayer2.style.animationPlayState = "paused";
+		DOM_GameLayer3.style.animationPlayState = "paused";
+		DOM_GameLayer4.style.animationPlayState = "paused";
+		DOM_GameLayer5.style.animationPlayState = "paused";
+		DOM_GameLayer6.style.animationPlayState = "paused";
+		DOM_Bubble1.style.animationPlayState = "paused";
+		DOM_Bubble2.style.animationPlayState = "paused";
+		DOM_Bubble3.style.animationPlayState = "paused";
+		DOM_Bubble4.style.animationPlayState = "paused";
+		clearInterval(timer);
+		//for (var i = 0; i < DOM_mainContainer.childNodes.length; ++i) //if (DOM_mainContainer.childNodes[i].style.animation ===true)
+			//DOM_mainContainer.childNodes[i].style.animationPlayState = 'paused';
+			//console.log(DOM_mainContainer.childNodes[i].style.animation);
+			//console.log(DOM_mainContainer.childNodes[i].getAttribute("animation"));
+	})*/
 }
-//Step by step run app
-startSlideOne();
-
-DOM_mainContainer.addEventListener("mouseup", () => { startTimerslideOne = setTimeout(endSlideOne, 2000); });
-DOM_mainContainer.addEventListener("touchend", () => { startTimerslideOne = setTimeout(endSlideOne, 2000); });
 
 
+	// Paused Slide 2
+	function PauseSlide1 (){
+		DOM_GameLayer1.style.animationPlayState = "paused";
+		DOM_GameLayer2.style.animationPlayState = "paused";
+		DOM_GameLayer3.style.animationPlayState = "paused";
+		DOM_GameLayer4.style.animationPlayState = "paused";
+		DOM_GameLayer5.style.animationPlayState = "paused";
+		DOM_GameLayer6.style.animationPlayState = "paused";
+		DOM_Bubble1.style.animationPlayState = "paused";
+		DOM_Bubble2.style.animationPlayState = "paused";
+		DOM_Bubble3.style.animationPlayState = "paused";
+		DOM_Bubble4.style.animationPlayState = "paused";
+		clearInterval(timer);
+		//for (var i = 0; i < DOM_mainContainer.childNodes.length; ++i) //if (DOM_mainContainer.childNodes[i].style.animation ===true)
+			//DOM_mainContainer.childNodes[i].style.animationPlayState = 'paused';
+			//console.log(DOM_mainContainer.childNodes[i].style.animation);
+			//console.log(DOM_mainContainer.childNodes[i].getAttribute("animation"));
+	};
+
+	//End First Slide
+	function endSlideTwo() {
+		DOM_mainContainer.removeChild(DOM_GameLayer1);
+		DOM_mainContainer.removeChild(DOM_GameLayer2);
+		DOM_mainContainer.removeChild(DOM_GameLayer3);
+		DOM_mainContainer.removeChild(DOM_GameLayer4);
+		DOM_mainContainer.removeChild(DOM_GameLayer5);
+		DOM_mainContainer.removeChild(DOM_CounterMeterImg);
+		DOM_mainContainer.removeChild(DOM_CounterMeter);
+		DOM_mainContainer.removeChild(DOM_CounterEnergyImg);
+		DOM_mainContainer.removeChild(DOM_CounterEnergyFull);
+		DOM_mainContainer.removeChild(DOM_CounterEnergy);
+		DOM_mainContainer.removeChild(DOM_Dino);
+		DOM_mainContainer.removeChild(DOM_GameLayer6);
+		startSlideThree();
+	};
+
+	//Start Slide Two
+	function startSlideThree() {
+		DOM_Background.src = srcBackground;
+		DOM_Background.style.cssText = styleBanner;
 
 
+		DOM_TextSecondSlide.src = srcTextSecondSlide;
+		DOM_TextSecondSlide.style.cssText = styleBanner;
 
-var RAF = window.requestAnimationFrame ||
-	window.webkitRequestAnimationFrame ||
-	window.mozRequestAnimationFrame ||
-	window.oRequestAnimationFrame ||
-	window.msRequestAnimationFrame ||
-	function (callback) { window.setTimeout(callback, 1000 / 60); }
-	;
+		DOM_BtnSecondSlide.src = srcBtnSecondSlide;
+		DOM_BtnSecondSlide.style.cssText = styleBanner;
 
-var DOM_IconApp_Position = {
-	posX: -200,
-	posY: -500,
-	speedX: 4,
-	speedY: 10,
-	scale: 1,
-	opacity: 0,
+		DOM_IconApp.src = srcIconApp;
+		DOM_IconApp.style.cssText = styleBanner;
 
-	update: function () {
-		DOM_IconApp.style.left = this.posX + "px";
-		DOM_IconApp.style.top = this.posY + "px";
-		DOM_IconApp.style.width= this.scale + "px";
-		DOM_IconApp.style.opacity = this.opacity;
+		DOM_IconsMarkets.src = srcIconsMarkets;
+		DOM_IconsMarkets.style.cssText = styleBanner;
+
+		DOM_mainContainer.appendChild(DOM_Background);
+		DOM_mainContainer.appendChild(DOM_TextSecondSlide);
+		DOM_mainContainer.appendChild(DOM_BtnSecondSlide);
+		DOM_mainContainer.appendChild(DOM_IconApp);
+		DOM_mainContainer.appendChild(DOM_IconsMarkets);
+	};
+
+	function namePlaceMove() {
+		countMeter = 0;
+		var countText = "" + count;
+
+		count = count + 10;
+
+		var start = Date.now(); // запомнить время начала
+
+		timer = setInterval(function () {
+			var timePassed = Math.round(1.5 * (Date.now() - start) / 1000);
+			var timePassedGo = (1.5 * (Date.now() - start) / 1000);
+			DOM_GameMetersCount.innerText = timePassed + "m";
+			DOM_GameEnergyCount.innerText = Math.round((49 - timePassedGo) * 2) + "%";
+			DOM_CounterEnergyFull.style.cssText = "width: " + Math.round(80 * ((49 - timePassedGo) * 2 / 100)) + "px; height:51px; position: absolute; left: 530px; top: 5px; overflow: hidden;";
+			// Условие, если проценты меньше 0 то показываем финишный слайд.
+			//DOM_GameMetersCount.innerText = "150m";
+			if ((49 - timePassedGo) < 1) endSlideTwo();
+			if(DOM_Bubble1.offsetLeft <= 400) PauseSlide1();
+		}, 20);
 	}
-};
+	//Step by step run app
+	startSlideOne();
 
-var DOM_TextFirstSlide_Position = {
-	posX: 300,
-	posY: 600,
-	speedX: 8,
-	speedY: 15,
-	scale: 2000,
-	opacity: 0,
+	//DOM_mainContainer.addEventListener("mouseup", () => { startTimerslideOne = setTimeout(endSlideOne, 2000); });
+	//DOM_mainContainer.addEventListener("touchend", () => { startTimerslideOne = setTimeout(endSlideOne, 2000); });
 
-	update: function () {
-		DOM_TextFirstSlide.style.left = this.posX + "px";
-		DOM_TextFirstSlide.style.top = this.posX + "px";
-		DOM_TextFirstSlide.style.width = this.scale + "px";
-		DOM_TextFirstSlide.style.opacity = this.opacity;
+	var RAF = window.requestAnimationFrame ||
+		window.webkitRequestAnimationFrame ||
+		window.mozRequestAnimationFrame ||
+		window.oRequestAnimationFrame ||
+		window.msRequestAnimationFrame ||
+		function (callback) { window.setTimeout(callback, 1000 / 60); }
+		;
+
+	var DOM_IconApp_Position = {
+		posY: -500,
+		speedY: 10,
+		update: function () {
+			DOM_IconApp.style.top = this.posY + "px";
+			DOM_IconApp.style.opacity = this.opacity;
+		}
+	};
+
+	var DOM_TextFirstSlide_Position = {
+		posY: 600,
+		speedY: 15,
+		opacity: 0,
+		update: function () {
+			DOM_TextFirstSlide.style.top = this.posY + "px";
+			DOM_TextFirstSlide.style.opacity = this.opacity;
+		}
 	}
-}
 
 
-function startAnime() {
-	// синхрон с внутренней анимацией браузера
-	// обычно 60 раз в сек
-	RAF(tick);
-}
+	function startAnime() {
+		RAF(tick);
+	}
 
-function tick() {
+	function tick() {
+		DOM_IconApp_Position.posY += DOM_IconApp_Position.speedY;
+		DOM_IconApp_Position.opacity += 0.006;
+		if (DOM_IconApp_Position.posY >= 0) DOM_IconApp_Position.posY = 0;
+		if (DOM_IconApp_Position.opacity >= 1) DOM_IconApp_Position.opacity = 1;
+		DOM_IconApp_Position.update();
 
-	DOM_IconApp_Position.posX += DOM_IconApp_Position.speedX;
-	DOM_IconApp_Position.posY += DOM_IconApp_Position.speedY;
-	DOM_IconApp_Position.scale += DOM_IconApp_Position.speedY;
-	DOM_IconApp_Position.opacity += 0.006;
-	if (DOM_IconApp_Position.posX >= 0) DOM_IconApp_Position.posX =0;
-	if (DOM_IconApp_Position.posY >= 0) DOM_IconApp_Position.posY =0;
-	if (DOM_IconApp_Position.scale >= WIDTH_MAIN) DOM_IconApp_Position.scale =WIDTH_MAIN;
-	if (DOM_IconApp_Position.opacity >= 1) DOM_IconApp_Position.opacity =1;
+		DOM_TextFirstSlide_Position.posY -= DOM_TextFirstSlide_Position.speedY;
+		DOM_TextFirstSlide_Position.opacity += 0.007;
+		if (DOM_TextFirstSlide_Position.posY <= 0) DOM_TextFirstSlide_Position.posY = 0;
+		if (DOM_TextFirstSlide_Position.opacity >= 1) DOM_TextFirstSlide_Position.opacity = 1;
+		DOM_TextFirstSlide_Position.update();
+
+		RAF(tick);
+	}
+
 	DOM_IconApp_Position.update();
 
-	DOM_TextFirstSlide_Position.posX -= DOM_TextFirstSlide_Position.speedX;
-	DOM_TextFirstSlide_Position.posY -= DOM_TextFirstSlide_Position.speedY;
-	DOM_TextFirstSlide_Position.scale -= DOM_TextFirstSlide_Position.speedY;
-	DOM_TextFirstSlide_Position.opacity += 0.005;
-	if (DOM_TextFirstSlide_Position.posX <= 0) DOM_TextFirstSlide_Position.posX =0;
-	if (DOM_TextFirstSlide_Position.posY <= 0) DOM_TextFirstSlide_Position.posY =0;
-	if (DOM_TextFirstSlide_Position.scale <= WIDTH_MAIN) DOM_TextFirstSlide_Position.scale = WIDTH_MAIN;
-	if (DOM_TextFirstSlide_Position.opacity >= 1) DOM_TextFirstSlide_Position.opacity =1;
-	DOM_TextFirstSlide_Position.update();
+	startAnime();
 
+	admixAPI.on('load', function () {
+		admixAPI.init({
+			'resize': [
+				{
+					'name': 'state-1',
+					'width': '650px',
+					'height': '250px'
+				}
+			]
+		});
+		function $(id) {
+			return document.getElementById(id);
+		}
 
-
-	RAF(tick);
-}
-
-DOM_IconApp_Position.update();
-
-startAnime();
+		/*document.body.onclick = function(){
+			admixAPI.click('https://ar.team');
+		};
+		document.body.onselectstart = function() {
+			return false;
+		}*/
+	});
